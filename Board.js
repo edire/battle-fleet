@@ -24,10 +24,9 @@ function getRealDot(x, y, size, direction) {
 function getRoundDot(x, y, size, direction) {
     var arr = [],
         i;
-    i = (direction == 'horizontal') ? x : y;
 
     if (direction == 'horizontal') {
-        for (var i = x - 1; i <= x + size + 1; i++) {
+        for (var i = x - 1; i <= x + size; i++) {
             arr.push({
                 x: i,
                 y: y - 1
@@ -42,11 +41,11 @@ function getRoundDot(x, y, size, direction) {
             y: y
         });
         arr.push({
-            x: i,
+            x: x + size,
             y: y
         });
     } else {
-        for (var i = y - 1; i <= y + size + 1; i++) {
+        for (var i = y - 1; i <= y + size; i++) {
             arr.push({
                 x: x + 1,
                 y: i
@@ -62,7 +61,7 @@ function getRoundDot(x, y, size, direction) {
         })
         arr.push({
             x: x,
-            y: i
+            y: y + size
         })
     }
     return arr;
