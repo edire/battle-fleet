@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选择房间</title>
+    <style>
+    ul,
+    li {
+        list-style: none;
+    }
+    
+    .room-list {
+        overflow: hidden;
+    }
+    
+    .user-list {
+        overflow: hidden;
+    }
+    
+    .room {
+        float: left;
+        width: 400px;
+        overflow: hidden;
+        margin-bottom: 100px;
+    }
+    
+    .user {
+        width: 50px;
+        height: 50px;
+        background: #ccc;
+        float: left;
+        margin: 10px;
+    }
+    
+    .table {
+        width: 200px;
+        height: 200px;
+        background: #ccc;
+        border: 4px solid blue;
+        border-radius: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <ul class="room-list" id="roomList">
+    </ul>
+    <script src="socket.io-1.5.0.js"></script>
+    <script src="jquery.js"></script>
+    <script src="const.js"></script>
+    <script>
+    var socket = io.connect('http://127.0.0.1:8989');
+    var conf = {
+        roomCount: 5
+    }
+
+    function getHtml(id) {
+        return '<li class="room" data-id="' + id + '"> ' +
+            '<div class="user-list"> ' +
+            '<div class="user user1" data-empty="true"></div> ' +
+            '<div class="user user2" data-empty="true"></div> ' +
+            '</div> ' +
+            '<div class="table"></div> ' +
+            '</li>';
+    }
+
+    function renderRoom() {
+        var html = '';
+        for (var i = 0; i < conf.roomCount; i++) {
+            html += getHtml('room_' + (i + 1));
+        }
+        $('#roomList').html(html);
+
+        $('#roomList').on('click', '.user', function() {
+            var $this = $(this);
+            var id = $this.closest('.room').data('id');
+            enterRoom(id);
+        })
+    }
+
+    renderRoom();
+
+
+
+    function enterRoom(id) {
+        socket.emit('event', {
+            type: 'enterRoom',
+            roomId: id,
+        });
+    }
+
+    function enterRoomSucc(id) {
+        $('[data-id="' + id + '"]').find('[data-empty="true"]').eq(0).css('background', 'green').data('empty', 'false');
+    }
+
+
+
+    function init() {
+        socket.on(CONST.EVENT.ROOM.ENTER_SUCC, function(data) {
+            enterRoomSucc(data.id, data.index);
+        });
+        socket.on(CONST.EVENT.ROOM.ENTER_FAIL, function(data) {
+            console.log(data.errno);
+        });
+    }
+
+    init();
+    </script>
+</body>
+
+</html>

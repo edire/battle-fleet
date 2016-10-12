@@ -1,0 +1,29 @@
+{
+  "name": "battle-fleet",
+  "version": "1.0.0",
+  "description": "大海战",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edire/battle-fleet.git"
+  },
+  "author": "明非",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edire/battle-fleet/issues"
+  },
+  "homepage": "https://github.com/edire/battle-fleet#readme",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.0",
+    "socket.io": "^1.5.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.17.3",
+    "browserify": "^13.1.0",
+    "browserify-shim": "^3.8.12",
+    "gulp": "^3.9.1"
+  }
+}
