@@ -1,3 +1,5 @@
+var createBoard = require('./lib/createBoard');
+
 var conf = {
     battle: {
         rowY: 10,
@@ -20,8 +22,7 @@ var conf = {
 
 var boardStorage = [];
 
-createBoard();
-
+// createBorad();
 
 var arr = [];
 for (var i = 0; i < conf.battle.cellX; i++) {
@@ -42,7 +43,7 @@ arr.forEach(function(d) {
     html += '</div>';
 });
 battleBox.innerHTML = html;
-
+ 
 boardStorage.forEach(function(board) {
     board.useDot.forEach(function(d) {
         var dom = document.querySelector('[data-x="'+d.x+'"][data-y="'+d.y+'"]');

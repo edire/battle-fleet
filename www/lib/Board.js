@@ -9,7 +9,7 @@ function Board(x, y, size, direction) {
     this.useDot = getRealDot(x, y, size, direction);
     this.realDot = getRoundDot(x, y, size, direction);
 }
-
+ 
 // 获取物体的位置
 function getRealDot(x, y, size, direction) {
     var arr = [],

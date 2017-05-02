@@ -7,4 +7,3 @@ var CONST = {
     }
 
 }
-
